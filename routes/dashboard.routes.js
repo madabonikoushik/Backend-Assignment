@@ -4,29 +4,7 @@ const auth = require('../middleware/auth.middleware')
 const role = require('../middleware/role.middleware')
 
 const router = express.Router()
-/**
- * @swagger
- * /dashboard/summary:
- *   get:
- *     summary: Get income, expense, and balance summary
- *     tags: [Dashboard]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Dashboard summary
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 income:
- *                   type: number
- *                 expense:
- *                   type: number
- *                 balance:
- *                   type: number
- */
+
 router.get('/summary', auth, role(['admin', 'analyst']), (req, res) => {
   db.all(
     `SELECT 
